@@ -28,3 +28,6 @@ validator's
 vc
 wei
 EIP
+Fulu
+fulu
+submitBlindedBlockV
