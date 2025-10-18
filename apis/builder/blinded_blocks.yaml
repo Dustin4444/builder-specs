@@ -1,7 +1,6 @@
 post:
   operationId: "submitBlindedBlock"
   summary: Submit a signed blinded block and get unblinded execution payload.
-  deprecated: true
   description: |
     Submits a `SignedBlindedBeaconBlock` to the builder, binding the proposer
     to the block.
@@ -13,8 +12,6 @@ post:
 
     After Deneb, this endpoint will additionally return the associated blobs in the response.
 
-    After Fulu, this endpoint will be deprecated.
-
     Note: SSZ support can be determined by requesting an SSZ encoded response in the `getHeader`
     request.
   tags:
@@ -25,7 +22,7 @@ post:
         $ref: "../../builder-oapi.yaml#/components/schemas/ConsensusVersion"
       required: false
       name: Eth-Consensus-Version
-      description: "The active consensus version to which the block being submitted belongs. Required if request is SSZ encoded."
+      description: "Version of the block being submitted"
   requestBody:
     description: A `SignedBlindedBeaconBlock`.
     required: true
@@ -46,8 +43,6 @@ post:
             $ref: "../../builder-oapi.yaml#/components/examples/Deneb.SignedBlindedBeaconBlock"
           electra:
             $ref: "../../builder-oapi.yaml#/components/examples/Electra.SignedBlindedBeaconBlock"
-          fulu:
-            $ref: "../../builder-oapi.yaml#/components/examples/Fulu.SignedBlindedBeaconBlock"
       application/octet-stream:
         schema:
           description: "SSZ serialized `SignedBlindedBeaconBlock` bytes. Use content type header to indicate that SSZ data is contained in the request body."
@@ -67,14 +62,13 @@ post:
             properties:
               version:
                 type: string
-                enum: [bellatrix, capella, deneb, electra, fulu]
+                enum: [ bellatrix, capella, deneb, electra ]
                 example: "bellatrix"
               data:
                 anyOf:
                   - $ref: "../../builder-oapi.yaml#/components/schemas/Bellatrix.ExecutionPayload"
                   - $ref: "../../builder-oapi.yaml#/components/schemas/Capella.ExecutionPayload"
                   - $ref: "../../builder-oapi.yaml#/components/schemas/Deneb.ExecutionPayloadAndBlobsBundle"
-                  - $ref: "../../builder-oapi.yaml#/components/schemas/Fulu.ExecutionPayloadAndBlobsBundle"
           examples:
             bellatrix:
               $ref: "../../builder-oapi.yaml#/components/examples/Bellatrix.ExecutionPayload"
@@ -83,9 +77,7 @@ post:
             deneb:
               $ref: "../../builder-oapi.yaml#/components/examples/Deneb.ExecutionPayloadAndBlobsBundle"
             electra:
-              $ref: "../../builder-oapi.yaml#/components/examples/Electra.ExecutionPayloadAndBlobsBundle"
-            fulu:
-              $ref: "../../builder-oapi.yaml#/components/examples/Fulu.ExecutionPayloadAndBlobsBundle"
+              $ref: "../../builder-oapi.yaml#/components/examples/Deneb.ExecutionPayloadAndBlobsBundle"
         application/octet-stream:
           schema:
             description: "SSZ serialized `ExecutionPayload` or `ExecutionPayloadAndBlobsBundle` bytes. Use Accept header to choose this response type"

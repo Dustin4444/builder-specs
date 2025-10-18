@@ -38,7 +38,6 @@ multiplexers. Please see their respective repositories for more information:
 
 * [`mev-boost`][mev-boost]
 * [`mev-rs`][mev-rs]
-* [`commit-boost`][commit-boost]
 
 ## Contributing
 
@@ -95,4 +94,3 @@ with real tag name from step 1.):
 [mev-boost-ethr]: https://ethresear.ch/t/mev-boost-merge-ready-flashbots-architecture/11177
 [mev-boost]: https://github.com/flashbots/mev-boost
 [mev-rs]: https://github.com/ralexstokes/mev-rs
-[commit-boost]: https://github.com/Commit-Boost/commit-boost-client
